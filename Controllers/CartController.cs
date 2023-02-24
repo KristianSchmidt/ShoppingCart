@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Concurrent;
 
 namespace ShoppingCart.Controllers
 {
@@ -40,6 +41,13 @@ namespace ShoppingCart.Controllers
         public void RemoveItem(int cartId, int itemId)
         {
             _cartStorage.RemoveItem(cartId, itemId);
+        }
+
+        [HttpGet()]
+        [Route("/getall")]
+        public ConcurrentDictionary<int,Dictionary<int,int>> GetAllCarts()
+        {
+            return _cartStorage.GetAllCarts();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace ShoppingCart
         Dictionary<int,int> GetCart(int cartId);
         void AddItem(int cartId, int itemId);
         void RemoveItem(int cartId, int itemId);
+        ConcurrentDictionary<int, Dictionary<int, int>> GetAllCarts();
     }
 
     public class CartStorage : ICartStorage
@@ -73,6 +74,11 @@ namespace ShoppingCart
                 // Would probably make a custom exception here, but sticking with plain old Exception to keep time.
                 throw new Exception($"Cart with ID {cartId} not found");
             }
+        }
+
+        public ConcurrentDictionary<int,Dictionary<int,int>> GetAllCarts()
+        {
+            return _storage;
         }
     }
 }
